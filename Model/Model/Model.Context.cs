@@ -26,6 +26,7 @@ namespace Model.Model
         }
     
         public virtual DbSet<Acreditacion> Acreditacion { get; set; }
+        public virtual DbSet<FormaPago> FormaPago { get; set; }
         public virtual DbSet<Item> Item { get; set; }
         public virtual DbSet<ItemCampo> ItemCampo { get; set; }
         public virtual DbSet<ItemCampoCatalogo> ItemCampoCatalogo { get; set; }

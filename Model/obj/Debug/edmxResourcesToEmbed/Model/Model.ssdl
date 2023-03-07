@@ -8,6 +8,15 @@
     <Property Name="puntoVentaId" Type="bigint" Nullable="false" />
     <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="fechaAcreditacion" Type="datetime" />
+    <Property Name="formaPagoId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FormaPago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Item">
     <Key>
@@ -90,6 +99,18 @@
     <Property Name="valor" Type="decimal" Precision="18" Scale="4" Nullable="false" />
     <Property Name="nroTransaccionProveedor" Type="varchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_Acreditacion_FormaPago">
+    <End Role="FormaPago" Type="Self.FormaPago" Multiplicity="1" />
+    <End Role="Acreditacion" Type="Self.Acreditacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormaPago">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Acreditacion">
+        <PropertyRef Name="formaPagoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Acreditacion_PuntoVentaId">
     <End Role="PuntoVenta" Type="Self.PuntoVenta" Multiplicity="1" />
     <End Role="Acreditacion" Type="Self.Acreditacion" Multiplicity="*" />
@@ -140,6 +161,7 @@
   </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="Acreditacion" EntityType="Self.Acreditacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FormaPago" EntityType="Self.FormaPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItemCampo" EntityType="Self.ItemCampo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItemCampoCatalogo" EntityType="Self.ItemCampoCatalogo" Schema="dbo" store:Type="Tables" />
@@ -147,6 +169,10 @@
     <EntitySet Name="PuntoVenta" EntityType="Self.PuntoVenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Saldo" EntityType="Self.Saldo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransaccionPago" EntityType="Self.TransaccionPago" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Acreditacion_FormaPago" Association="Self.FK_Acreditacion_FormaPago">
+      <End Role="FormaPago" EntitySet="FormaPago" />
+      <End Role="Acreditacion" EntitySet="Acreditacion" />
+    </AssociationSet>
     <AssociationSet Name="FK_Acreditacion_PuntoVentaId" Association="Self.FK_Acreditacion_PuntoVentaId">
       <End Role="PuntoVenta" EntitySet="PuntoVenta" />
       <End Role="Acreditacion" EntitySet="Acreditacion" />

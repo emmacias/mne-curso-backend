@@ -43,10 +43,14 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\EnumeradoresUTL.cs" />
+    <Compile Include="ViewModels\AcreditacionFormDataVMR.cs" />
+    <Compile Include="ViewModels\AcreditacionVMR.cs" />
+    <Compile Include="ViewModels\FormaPagoVMR.cs" />
     <Compile Include="ViewModels\ItemCampoCatalogoVMR.cs" />
     <Compile Include="ViewModels\ItemCampoVMR.cs" />
     <Compile Include="ViewModels\ItemVMR.cs" />
     <Compile Include="ViewModels\ListadoPaginadoVMR.cs" />
+    <Compile Include="ViewModels\PuntoVentaVMR.cs" />
     <Compile Include="ViewModels\RespuestaVMR.cs" />
     <Compile Include="ViewModels\SaldoVMR.cs" />
   </ItemGroup>

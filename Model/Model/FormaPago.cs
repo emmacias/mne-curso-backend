@@ -12,15 +12,19 @@ namespace Model.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Acreditacion
+    public partial class FormaPago
     {
-        public long id { get; set; }
-        public long puntoVentaId { get; set; }
-        public decimal valor { get; set; }
-        public Nullable<System.DateTime> fechaAcreditacion { get; set; }
-        public long formaPagoId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FormaPago()
+        {
+            this.Acreditacion = new HashSet<Acreditacion>();
+        }
     
-        public virtual FormaPago FormaPago { get; set; }
-        public virtual PuntoVenta PuntoVenta { get; set; }
+        public long id { get; set; }
+        public string nombre { get; set; }
+        public bool habilitado { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Acreditacion> Acreditacion { get; set; }
     }
 }

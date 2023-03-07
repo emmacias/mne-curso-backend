@@ -1,47 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DbConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Acreditacion" EntityType="Model.Acreditacion" />
+    <EntitySet Name="FormaPago" EntityType="Model.FormaPago" />
+    <EntitySet Name="Item" EntityType="Model.Item" />
+    <EntitySet Name="ItemCampo" EntityType="Model.ItemCampo" />
+    <EntitySet Name="ItemCampoCatalogo" EntityType="Model.ItemCampoCatalogo" />
+    <EntitySet Name="Proveedor" EntityType="Model.Proveedor" />
+    <EntitySet Name="PuntoVenta" EntityType="Model.PuntoVenta" />
+    <EntitySet Name="Saldo" EntityType="Model.Saldo" />
+    <EntitySet Name="TransaccionPago" EntityType="Model.TransaccionPago" />
+    <AssociationSet Name="FK_Acreditacion_FormaPago" Association="Model.FK_Acreditacion_FormaPago">
+      <End Role="FormaPago" EntitySet="FormaPago" />
+      <End Role="Acreditacion" EntitySet="Acreditacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Acreditacion_PuntoVentaId" Association="Model.FK_Acreditacion_PuntoVentaId">
+      <End Role="PuntoVenta" EntitySet="PuntoVenta" />
+      <End Role="Acreditacion" EntitySet="Acreditacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_Proveedor" Association="Model.FK_Item_Proveedor">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemCampo_Item" Association="Model.FK_ItemCampo_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="ItemCampo" EntitySet="ItemCampo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemCampoCatalogo_ItemCampo" Association="Model.FK_ItemCampoCatalogo_ItemCampo">
+      <End Role="ItemCampo" EntitySet="ItemCampo" />
+      <End Role="ItemCampoCatalogo" EntitySet="ItemCampoCatalogo" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Acreditacion">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="puntoVentaId" Type="Int64" Nullable="false" />
-    <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="fechaAcreditacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="PuntoVenta" Relationship="Self.FK_Acreditacion_PuntoVentaId" FromRole="Acreditacion" ToRole="PuntoVenta" />
+    <Property Name="formaPagoId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="FormaPago" Relationship="Model.FK_Acreditacion_FormaPago" FromRole="Acreditacion" ToRole="FormaPago" />
+    <NavigationProperty Name="PuntoVenta" Relationship="Model.FK_Acreditacion_PuntoVentaId" FromRole="Acreditacion" ToRole="PuntoVenta" />
+  </EntityType>
+  <EntityType Name="FormaPago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Acreditacion" Relationship="Model.FK_Acreditacion_FormaPago" FromRole="FormaPago" ToRole="Acreditacion" />
   </EntityType>
   <EntityType Name="Item">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="orden" Type="Int32" Nullable="false" />
     <Property Name="habilitado" Type="Boolean" Nullable="false" />
     <Property Name="borrado" Type="Boolean" Nullable="false" />
     <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="proveedorId" Type="Int64" Nullable="false" />
-    <Property Name="valorComision" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="valorComision" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="tipoComision" Type="Int32" Nullable="false" />
-    <Property Name="imagen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Proveedor" Relationship="Self.FK_Item_Proveedor" FromRole="Item" ToRole="Proveedor" />
-    <NavigationProperty Name="ItemCampo" Relationship="Self.FK_ItemCampo_Item" FromRole="Item" ToRole="ItemCampo" />
+    <Property Name="imagen" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Proveedor" Relationship="Model.FK_Item_Proveedor" FromRole="Item" ToRole="Proveedor" />
+    <NavigationProperty Name="ItemCampo" Relationship="Model.FK_ItemCampo_Item" FromRole="Item" ToRole="ItemCampo" />
   </EntityType>
   <EntityType Name="ItemCampo">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="etiqueta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="etiqueta" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="validacionRegEx" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="orden" Type="Int32" Nullable="false" />
     <Property Name="textAyuda" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="textError" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="habilitado" Type="Boolean" Nullable="false" />
     <Property Name="itemId" Type="Int64" Nullable="false" />
-    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Item" Relationship="Self.FK_ItemCampo_Item" FromRole="ItemCampo" ToRole="Item" />
-    <NavigationProperty Name="ItemCampoCatalogo" Relationship="Self.FK_ItemCampoCatalogo_ItemCampo" FromRole="ItemCampo" ToRole="ItemCampoCatalogo" />
+    <Property Name="tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Item" Relationship="Model.FK_ItemCampo_Item" FromRole="ItemCampo" ToRole="Item" />
+    <NavigationProperty Name="ItemCampoCatalogo" Relationship="Model.FK_ItemCampoCatalogo_ItemCampo" FromRole="ItemCampo" ToRole="ItemCampoCatalogo" />
   </EntityType>
   <EntityType Name="ItemCampoCatalogo">
     <Key>
@@ -49,37 +91,37 @@
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="valor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="valor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="habilitado" Type="Boolean" Nullable="false" />
     <Property Name="itemCampoId" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="ItemCampo" Relationship="Self.FK_ItemCampoCatalogo_ItemCampo" FromRole="ItemCampoCatalogo" ToRole="ItemCampo" />
+    <NavigationProperty Name="ItemCampo" Relationship="Model.FK_ItemCampoCatalogo_ItemCampo" FromRole="ItemCampoCatalogo" ToRole="ItemCampo" />
   </EntityType>
   <EntityType Name="Proveedor">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="bloqueado" Type="Boolean" />
-    <Property Name="urlServicios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Item" Relationship="Self.FK_Item_Proveedor" FromRole="Proveedor" ToRole="Item" />
+    <Property Name="urlServicios" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Item" Relationship="Model.FK_Item_Proveedor" FromRole="Proveedor" ToRole="Item" />
   </EntityType>
   <EntityType Name="PuntoVenta">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="habilitado" Type="Byte" Nullable="false" />
     <Property Name="valorMaximoAcreditacion" Type="Decimal" Precision="18" Scale="2" />
-    <NavigationProperty Name="Acreditacion" Relationship="Self.FK_Acreditacion_PuntoVentaId" FromRole="PuntoVenta" ToRole="Acreditacion" />
+    <NavigationProperty Name="Acreditacion" Relationship="Model.FK_Acreditacion_PuntoVentaId" FromRole="PuntoVenta" ToRole="Acreditacion" />
   </EntityType>
   <EntityType Name="Saldo">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="monto" Type="Decimal" Precision="20" Scale="6" Nullable="false" />
+    <Property Name="monto" Type="Decimal" Nullable="false" Precision="20" Scale="6" />
     <Property Name="identificadorExterno" Type="Int64" Nullable="false" />
     <Property Name="tipo" Type="Int64" Nullable="false" />
     <Property Name="puntoVentaId" Type="Int64" Nullable="false" />
@@ -95,12 +137,24 @@
     <Property Name="itemId" Type="Int64" Nullable="false" />
     <Property Name="puntoVentaId" Type="Int64" Nullable="false" />
     <Property Name="exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="valor" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="nroTransaccionProveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <Association Name="FK_Acreditacion_FormaPago">
+    <End Type="Model.FormaPago" Role="FormaPago" Multiplicity="1" />
+    <End Type="Model.Acreditacion" Role="Acreditacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormaPago">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Acreditacion">
+        <PropertyRef Name="formaPagoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Acreditacion_PuntoVentaId">
-    <End Role="PuntoVenta" Type="Self.PuntoVenta" Multiplicity="1" />
-    <End Role="Acreditacion" Type="Self.Acreditacion" Multiplicity="*" />
+    <End Type="Model.PuntoVenta" Role="PuntoVenta" Multiplicity="1" />
+    <End Type="Model.Acreditacion" Role="Acreditacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PuntoVenta">
         <PropertyRef Name="id" />
@@ -111,8 +165,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Item_Proveedor">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
-    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <End Type="Model.Proveedor" Role="Proveedor" Multiplicity="1" />
+    <End Type="Model.Item" Role="Item" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Proveedor">
         <PropertyRef Name="id" />
@@ -123,8 +177,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ItemCampo_Item">
-    <End Role="Item" Type="Self.Item" Multiplicity="1" />
-    <End Role="ItemCampo" Type="Self.ItemCampo" Multiplicity="*" />
+    <End Type="Model.Item" Role="Item" Multiplicity="1" />
+    <End Type="Model.ItemCampo" Role="ItemCampo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Item">
         <PropertyRef Name="id" />
@@ -135,8 +189,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ItemCampoCatalogo_ItemCampo">
-    <End Role="ItemCampo" Type="Self.ItemCampo" Multiplicity="1" />
-    <End Role="ItemCampoCatalogo" Type="Self.ItemCampoCatalogo" Multiplicity="*" />
+    <End Type="Model.ItemCampo" Role="ItemCampo" Multiplicity="1" />
+    <End Type="Model.ItemCampoCatalogo" Role="ItemCampoCatalogo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ItemCampo">
         <PropertyRef Name="id" />
@@ -146,30 +200,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DbConnection" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Acreditacion" EntityType="Self.Acreditacion" />
-    <EntitySet Name="Item" EntityType="Self.Item" />
-    <EntitySet Name="ItemCampo" EntityType="Self.ItemCampo" />
-    <EntitySet Name="ItemCampoCatalogo" EntityType="Self.ItemCampoCatalogo" />
-    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
-    <EntitySet Name="PuntoVenta" EntityType="Self.PuntoVenta" />
-    <EntitySet Name="Saldo" EntityType="Self.Saldo" />
-    <EntitySet Name="TransaccionPago" EntityType="Self.TransaccionPago" />
-    <AssociationSet Name="FK_Acreditacion_PuntoVentaId" Association="Self.FK_Acreditacion_PuntoVentaId">
-      <End Role="PuntoVenta" EntitySet="PuntoVenta" />
-      <End Role="Acreditacion" EntitySet="Acreditacion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Item_Proveedor" Association="Self.FK_Item_Proveedor">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="Item" EntitySet="Item" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ItemCampo_Item" Association="Self.FK_ItemCampo_Item">
-      <End Role="Item" EntitySet="Item" />
-      <End Role="ItemCampo" EntitySet="ItemCampo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ItemCampoCatalogo_ItemCampo" Association="Self.FK_ItemCampoCatalogo_ItemCampo">
-      <End Role="ItemCampo" EntitySet="ItemCampo" />
-      <End Role="ItemCampoCatalogo" EntitySet="ItemCampoCatalogo" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

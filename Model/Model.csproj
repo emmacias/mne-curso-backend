@@ -57,6 +57,9 @@
     <Compile Include="Model\Acreditacion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\FormaPago.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Item.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

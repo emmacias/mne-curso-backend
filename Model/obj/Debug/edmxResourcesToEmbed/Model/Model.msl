@@ -4,98 +4,108 @@
     <EntitySetMapping Name="Acreditacion">
       <EntityTypeMapping TypeName="Model.Acreditacion">
         <MappingFragment StoreEntitySet="Acreditacion">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="puntoVentaId" ColumnName="puntoVentaId" />
-          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="formaPagoId" ColumnName="formaPagoId" />
           <ScalarProperty Name="fechaAcreditacion" ColumnName="fechaAcreditacion" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="puntoVentaId" ColumnName="puntoVentaId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormaPago">
+      <EntityTypeMapping TypeName="Model.FormaPago">
+        <MappingFragment StoreEntitySet="FormaPago">
+          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Item">
       <EntityTypeMapping TypeName="Model.Item">
         <MappingFragment StoreEntitySet="Item">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="orden" ColumnName="orden" />
-          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
-          <ScalarProperty Name="borrado" ColumnName="borrado" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="proveedorId" ColumnName="proveedorId" />
-          <ScalarProperty Name="valorComision" ColumnName="valorComision" />
-          <ScalarProperty Name="tipoComision" ColumnName="tipoComision" />
           <ScalarProperty Name="imagen" ColumnName="imagen" />
+          <ScalarProperty Name="tipoComision" ColumnName="tipoComision" />
+          <ScalarProperty Name="valorComision" ColumnName="valorComision" />
+          <ScalarProperty Name="proveedorId" ColumnName="proveedorId" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="borrado" ColumnName="borrado" />
+          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+          <ScalarProperty Name="orden" ColumnName="orden" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ItemCampo">
       <EntityTypeMapping TypeName="Model.ItemCampo">
         <MappingFragment StoreEntitySet="ItemCampo">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="etiqueta" ColumnName="etiqueta" />
-          <ScalarProperty Name="validacionRegEx" ColumnName="validacionRegEx" />
-          <ScalarProperty Name="orden" ColumnName="orden" />
-          <ScalarProperty Name="textAyuda" ColumnName="textAyuda" />
-          <ScalarProperty Name="textError" ColumnName="textError" />
-          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
-          <ScalarProperty Name="itemId" ColumnName="itemId" />
           <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+          <ScalarProperty Name="textError" ColumnName="textError" />
+          <ScalarProperty Name="textAyuda" ColumnName="textAyuda" />
+          <ScalarProperty Name="orden" ColumnName="orden" />
+          <ScalarProperty Name="validacionRegEx" ColumnName="validacionRegEx" />
+          <ScalarProperty Name="etiqueta" ColumnName="etiqueta" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ItemCampoCatalogo">
       <EntityTypeMapping TypeName="Model.ItemCampoCatalogo">
         <MappingFragment StoreEntitySet="ItemCampoCatalogo">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="valor" ColumnName="valor" />
-          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
           <ScalarProperty Name="itemCampoId" ColumnName="itemCampoId" />
+          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Proveedor">
       <EntityTypeMapping TypeName="Model.Proveedor">
         <MappingFragment StoreEntitySet="Proveedor">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="bloqueado" ColumnName="bloqueado" />
           <ScalarProperty Name="urlServicios" ColumnName="urlServicios" />
+          <ScalarProperty Name="bloqueado" ColumnName="bloqueado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PuntoVenta">
       <EntityTypeMapping TypeName="Model.PuntoVenta">
         <MappingFragment StoreEntitySet="PuntoVenta">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
           <ScalarProperty Name="valorMaximoAcreditacion" ColumnName="valorMaximoAcreditacion" />
+          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Saldo">
       <EntityTypeMapping TypeName="Model.Saldo">
         <MappingFragment StoreEntitySet="Saldo">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="monto" ColumnName="monto" />
-          <ScalarProperty Name="identificadorExterno" ColumnName="identificadorExterno" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="puntoVentaId" ColumnName="puntoVentaId" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="puntoVentaId" ColumnName="puntoVentaId" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="identificadorExterno" ColumnName="identificadorExterno" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TransaccionPago">
       <EntityTypeMapping TypeName="Model.TransaccionPago">
         <MappingFragment StoreEntitySet="TransaccionPago">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="itemId" ColumnName="itemId" />
-          <ScalarProperty Name="puntoVentaId" ColumnName="puntoVentaId" />
-          <ScalarProperty Name="exception" ColumnName="exception" />
-          <ScalarProperty Name="valor" ColumnName="valor" />
           <ScalarProperty Name="nroTransaccionProveedor" ColumnName="nroTransaccionProveedor" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="exception" ColumnName="exception" />
+          <ScalarProperty Name="puntoVentaId" ColumnName="puntoVentaId" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

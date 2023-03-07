@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AcreditacionController.cs" />
     <Compile Include="Controllers\ItemCampoController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\SaldoController.cs" />
