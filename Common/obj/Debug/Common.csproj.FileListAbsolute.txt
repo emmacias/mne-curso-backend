@@ -1,0 +1,12 @@
+E:\CURSO\CURSO\mne-curso\Common\bin\Debug\Common.dll
+E:\CURSO\CURSO\mne-curso\Common\bin\Debug\Common.pdb
+E:\CURSO\CURSO\mne-curso\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+E:\CURSO\CURSO\mne-curso\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+E:\CURSO\CURSO\mne-curso\Common\obj\Debug\Common.dll
+E:\CURSO\CURSO\mne-curso\Common\obj\Debug\Common.pdb
+E:\CURSO\CURSO\mne-curso-backend\Common\bin\Debug\Common.dll
+E:\CURSO\CURSO\mne-curso-backend\Common\bin\Debug\Common.pdb
+E:\CURSO\CURSO\mne-curso-backend\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+E:\CURSO\CURSO\mne-curso-backend\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+E:\CURSO\CURSO\mne-curso-backend\Common\obj\Debug\Common.dll
+E:\CURSO\CURSO\mne-curso-backend\Common\obj\Debug\Common.pdb
