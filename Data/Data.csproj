@@ -54,6 +54,7 @@
     <Compile Include="DAL\AcreditacionDAL.cs" />
     <Compile Include="DAL\ItemCampoDAL.cs" />
     <Compile Include="DAL\ItemDAL.cs" />
+    <Compile Include="DAL\ProveedorDAL.cs" />
     <Compile Include="DAL\SaldoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

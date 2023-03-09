@@ -44,6 +44,7 @@
     <Compile Include="BLL\AcreditacionBLL.cs" />
     <Compile Include="BLL\ItemBLL.cs" />
     <Compile Include="BLL\ItemCampoBLL.cs" />
+    <Compile Include="BLL\ProveedorBLL.cs" />
     <Compile Include="BLL\SaldoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

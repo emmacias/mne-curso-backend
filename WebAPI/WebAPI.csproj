@@ -101,6 +101,7 @@
     <Compile Include="Controllers\AcreditacionController.cs" />
     <Compile Include="Controllers\ItemCampoController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SaldoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

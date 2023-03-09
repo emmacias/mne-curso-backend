@@ -50,6 +50,7 @@
     <Compile Include="ViewModels\ItemCampoVMR.cs" />
     <Compile Include="ViewModels\ItemVMR.cs" />
     <Compile Include="ViewModels\ListadoPaginadoVMR.cs" />
+    <Compile Include="ViewModels\ProveedorVMR.cs" />
     <Compile Include="ViewModels\PuntoVentaVMR.cs" />
     <Compile Include="ViewModels\RespuestaVMR.cs" />
     <Compile Include="ViewModels\SaldoVMR.cs" />
