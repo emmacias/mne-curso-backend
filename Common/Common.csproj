@@ -50,10 +50,13 @@
     <Compile Include="ViewModels\ItemCampoVMR.cs" />
     <Compile Include="ViewModels\ItemVMR.cs" />
     <Compile Include="ViewModels\ListadoPaginadoVMR.cs" />
+    <Compile Include="ViewModels\ProveedorFormDataVMR.cs" />
     <Compile Include="ViewModels\ProveedorVMR.cs" />
     <Compile Include="ViewModels\PuntoVentaVMR.cs" />
     <Compile Include="ViewModels\RespuestaVMR.cs" />
     <Compile Include="ViewModels\SaldoVMR.cs" />
+    <Compile Include="ViewModels\TelefonoContactoVMR.cs" />
+    <Compile Include="ViewModels\TelefonoOperadoraVMR.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

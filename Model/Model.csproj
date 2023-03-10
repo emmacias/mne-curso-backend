@@ -93,6 +93,12 @@
     <Compile Include="Model\Saldo.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TelefonoContacto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TelefonoOperadora.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\TransaccionPago.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

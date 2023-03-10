@@ -68,5 +68,15 @@ namespace Logic.BLL
         {
             return ProveedorDAL.ItemExists(id);
         }
+
+        /// <summary>
+        /// Método para obtener los datos necesarios para el formulario
+        /// </summary>
+        /// <param name="id">Identificador del item (0 cuando el formulario es de creación)</param>
+        /// <returns></returns>
+        public static ProveedorFormDataVMR GetFormData(long id)
+        {
+            return ProveedorDAL.GetFormData(id);
+        }
     }
 }

@@ -12,15 +12,14 @@ namespace Model.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Acreditacion
+    public partial class TelefonoContacto
     {
         public long id { get; set; }
-        public long puntoVentaId { get; set; }
-        public decimal valor { get; set; }
-        public System.DateTime fechaAcreditacion { get; set; }
-        public long formaPagoId { get; set; }
+        public string numero { get; set; }
+        public long telefonoOperadoraId { get; set; }
+        public long proveedorId { get; set; }
     
-        public virtual FormaPago FormaPago { get; set; }
-        public virtual PuntoVenta PuntoVenta { get; set; }
+        public virtual Proveedor Proveedor { get; set; }
+        public virtual TelefonoOperadora TelefonoOperadora { get; set; }
     }
 }

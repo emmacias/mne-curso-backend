@@ -18,6 +18,7 @@ namespace Model.Model
         public Proveedor()
         {
             this.Item = new HashSet<Item>();
+            this.TelefonoContacto = new HashSet<TelefonoContacto>();
         }
     
         public long id { get; set; }
@@ -27,5 +28,7 @@ namespace Model.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TelefonoContacto> TelefonoContacto { get; set; }
     }
 }

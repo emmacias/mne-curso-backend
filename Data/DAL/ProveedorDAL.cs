@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,7 +71,13 @@ namespace Data.DAL
                     id = x.id,
                     nombre = x.nombre,
                     bloqueado = x.bloqueado,
-                    urlServicios = x.urlServicios
+                    urlServicios = x.urlServicios,
+                    TelefonoContacto = db.TelefonoContacto.Where(t => t.proveedorId == x.id).Select(t => new TelefonoContactoVMR
+                    {
+                        id = t.id,
+                        numero = t.numero,
+                        telefonoOperadoraId = t.telefonoOperadoraId
+                    }).ToList()
                 }).FirstOrDefault();
             }
 
@@ -108,6 +115,43 @@ namespace Data.DAL
                 itemUpdate.bloqueado = item.bloqueado;
                 itemUpdate.urlServicios = item.urlServicios;
 
+                // Se obtienen los teléfonos existentes del proveedor
+                var telefonosExistentes = db.TelefonoContacto.Where(t => t.proveedorId == item.id).ToList();
+
+                // Se iteran los contactos de teléfono para actualizar (los existentes) o adicionar (los nuevos)
+                foreach (var telefonoActualizar in item.TelefonoContacto)
+                {
+                    var telefonoExistente = telefonosExistentes.FirstOrDefault(p => p.id == telefonoActualizar.id);
+
+                    // Se editan los teléfonos existentes
+                    if (telefonoExistente != null)
+                    {
+                        telefonoExistente.numero = telefonoActualizar.numero;
+                        telefonoExistente.telefonoOperadoraId = telefonoActualizar.telefonoOperadoraId;
+
+                        db.Entry(telefonoExistente).State = EntityState.Modified;
+                    }
+                    // se adicionan los teléfonos nuevos
+                    else
+                    {
+                        db.TelefonoContacto.Add(new TelefonoContacto { 
+                            numero = telefonoActualizar.numero,
+                            proveedorId = item.id,
+                            telefonoOperadoraId = telefonoActualizar.telefonoOperadoraId
+                        });
+                    }
+                }
+
+                // Se iteran los contactos de teléfono existentes para eliminar (los que no se enviaron desde el frontend)
+                foreach (var telefonoExistente in telefonosExistentes)
+                {
+                    if (!item.TelefonoContacto.Any(p => p.id == telefonoExistente.id))
+                    {
+                        db.TelefonoContacto.Remove(telefonoExistente);
+                    }
+                }
+
+
                 db.Entry(itemUpdate).State = EntityState.Modified;
 
                 db.SaveChanges();
@@ -122,11 +166,28 @@ namespace Data.DAL
         {
             using (var db = DbConnection.Create())
             {
-                var items = db.Proveedor.Where(x => ids.Contains(x.id));
+                using (var dbcxtransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var telefonos = db.TelefonoContacto.Where(x => ids.Contains(x.proveedorId));
 
-                db.Proveedor.RemoveRange(items);
+                        db.TelefonoContacto.RemoveRange(telefonos);
 
-                db.SaveChanges();
+                        var items = db.Proveedor.Where(x => ids.Contains(x.id));
+
+                        db.Proveedor.RemoveRange(items);
+
+                        db.SaveChanges();
+
+                        dbcxtransaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        dbcxtransaction.Rollback();
+                        throw e;
+                    }
+                }
             }
         }
 
@@ -144,6 +205,27 @@ namespace Data.DAL
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Método para obtener los datos necesarios para el formulario
+        /// </summary>
+        /// <param name="id">Identificador del item (0 cuando el formulario es de creación)</param>
+        /// <returns></returns>
+        public static ProveedorFormDataVMR GetFormData(long id)
+        {
+            ProveedorFormDataVMR datos = new ProveedorFormDataVMR();
+
+            using (var db = DbConnection.Create())
+            {
+                datos.telefonoOperadoraList = db.TelefonoOperadora.Select(x => new TelefonoOperadoraVMR
+                {
+                    id = x.id,
+                    nombre = x.nombre
+                }).ToList();
+            }
+
+            return datos;
         }
     }
 }

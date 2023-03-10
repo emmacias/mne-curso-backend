@@ -194,6 +194,38 @@ namespace WebAPI.Controllers
             return Content(respuesta.codigo, respuesta);
         }
 
+        // GET: api/proveedor/get-form-data
+        /// <summary>
+        /// Servicio para obtener los datos necesarios para el formulario
+        /// </summary>
+        /// <param name="id">Identificador del item (NULL cuando el formulario es de creación)</param>
+        /// <remarks>Servicio para obtener los datos necesarios para el formulario</remarks>
+        /// <response code="200">Ejecución exitosa</response>
+        /// <response code="400">Error en los datos enviados</response>
+        /// <response code="401">Token no válido o caducado</response>
+        /// <response code="404">Recurso no encontrado</response>
+        /// <response code="500">Error interno del servidor</response>
+        [ResponseType(typeof(RespuestaVMR<ProveedorFormDataVMR>))]
+        [Route("api/proveedor/get-form-data")]
+        public IHttpActionResult GetFormData(long id = 0)
+        {
+            var respuesta = new RespuestaVMR<ProveedorFormDataVMR>();
+
+            try
+            {
+                respuesta.datos = ProveedorBLL.GetFormData(id);
+            }
+            catch (Exception e)
+            {
+                respuesta.codigo = HttpStatusCode.InternalServerError;
+                respuesta.datos = null;
+                respuesta.mensajes.Add(e.Message);
+                respuesta.mensajes.Add(e.ToString());
+            }
+
+            return Content(respuesta.codigo, respuesta);
+        }
+
         /// <summary>
         /// Liberar los recursos de la aplicación
         /// </summary>

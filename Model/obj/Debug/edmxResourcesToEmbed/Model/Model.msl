@@ -95,6 +95,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TelefonoContacto">
+      <EntityTypeMapping TypeName="Model.TelefonoContacto">
+        <MappingFragment StoreEntitySet="TelefonoContacto">
+          <ScalarProperty Name="proveedorId" ColumnName="proveedorId" />
+          <ScalarProperty Name="telefonoOperadoraId" ColumnName="telefonoOperadoraId" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TelefonoOperadora">
+      <EntityTypeMapping TypeName="Model.TelefonoOperadora">
+        <MappingFragment StoreEntitySet="TelefonoOperadora">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TransaccionPago">
       <EntityTypeMapping TypeName="Model.TransaccionPago">
         <MappingFragment StoreEntitySet="TransaccionPago">

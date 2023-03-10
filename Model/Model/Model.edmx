@@ -12,7 +12,7 @@
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="puntoVentaId" Type="bigint" Nullable="false" />
           <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="fechaAcreditacion" Type="datetime" />
+          <Property Name="fechaAcreditacion" Type="datetime" Nullable="false" />
           <Property Name="formaPagoId" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="FormaPago">
@@ -91,6 +91,22 @@
           <Property Name="puntoVentaId" Type="bigint" Nullable="false" />
           <Property Name="fecha" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="TelefonoContacto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="telefonoOperadoraId" Type="bigint" Nullable="false" />
+          <Property Name="proveedorId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TelefonoOperadora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="TransaccionPago">
           <Key>
             <PropertyRef Name="id" />
@@ -164,6 +180,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TelefonoContacto_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="TelefonoContacto" Type="Self.TelefonoContacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonoContacto">
+              <PropertyRef Name="proveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonoContacto_TelefonoOperadora">
+          <End Role="TelefonoOperadora" Type="Self.TelefonoOperadora" Multiplicity="1" />
+          <End Role="TelefonoContacto" Type="Self.TelefonoContacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TelefonoOperadora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonoContacto">
+              <PropertyRef Name="telefonoOperadoraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Acreditacion" EntityType="Self.Acreditacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormaPago" EntityType="Self.FormaPago" Schema="dbo" store:Type="Tables" />
@@ -173,6 +213,8 @@
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuntoVenta" EntityType="Self.PuntoVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Saldo" EntityType="Self.Saldo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TelefonoContacto" EntityType="Self.TelefonoContacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TelefonoOperadora" EntityType="Self.TelefonoOperadora" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransaccionPago" EntityType="Self.TransaccionPago" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Acreditacion_FormaPago" Association="Self.FK_Acreditacion_FormaPago">
             <End Role="FormaPago" EntitySet="FormaPago" />
@@ -194,6 +236,14 @@
             <End Role="ItemCampo" EntitySet="ItemCampo" />
             <End Role="ItemCampoCatalogo" EntitySet="ItemCampoCatalogo" />
           </AssociationSet>
+          <AssociationSet Name="FK_TelefonoContacto_Proveedor" Association="Self.FK_TelefonoContacto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="TelefonoContacto" EntitySet="TelefonoContacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonoContacto_TelefonoOperadora" Association="Self.FK_TelefonoContacto_TelefonoOperadora">
+            <End Role="TelefonoOperadora" EntitySet="TelefonoOperadora" />
+            <End Role="TelefonoContacto" EntitySet="TelefonoContacto" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -208,6 +258,8 @@
           <EntitySet Name="Proveedor" EntityType="Model.Proveedor" />
           <EntitySet Name="PuntoVenta" EntityType="Model.PuntoVenta" />
           <EntitySet Name="Saldo" EntityType="Model.Saldo" />
+          <EntitySet Name="TelefonoContacto" EntityType="Model.TelefonoContacto" />
+          <EntitySet Name="TelefonoOperadora" EntityType="Model.TelefonoOperadora" />
           <EntitySet Name="TransaccionPago" EntityType="Model.TransaccionPago" />
           <AssociationSet Name="FK_Acreditacion_FormaPago" Association="Model.FK_Acreditacion_FormaPago">
             <End Role="FormaPago" EntitySet="FormaPago" />
@@ -229,6 +281,14 @@
             <End Role="ItemCampo" EntitySet="ItemCampo" />
             <End Role="ItemCampoCatalogo" EntitySet="ItemCampoCatalogo" />
           </AssociationSet>
+          <AssociationSet Name="FK_TelefonoContacto_Proveedor" Association="Model.FK_TelefonoContacto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="TelefonoContacto" EntitySet="TelefonoContacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TelefonoContacto_TelefonoOperadora" Association="Model.FK_TelefonoContacto_TelefonoOperadora">
+            <End Role="TelefonoOperadora" EntitySet="TelefonoOperadora" />
+            <End Role="TelefonoContacto" EntitySet="TelefonoContacto" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Acreditacion">
           <Key>
@@ -237,7 +297,7 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="puntoVentaId" Type="Int64" Nullable="false" />
           <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="fechaAcreditacion" Type="DateTime" Precision="3" />
+          <Property Name="fechaAcreditacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="formaPagoId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="FormaPago" Relationship="Model.FK_Acreditacion_FormaPago" FromRole="Acreditacion" ToRole="FormaPago" />
           <NavigationProperty Name="PuntoVenta" Relationship="Model.FK_Acreditacion_PuntoVentaId" FromRole="Acreditacion" ToRole="PuntoVenta" />
@@ -304,6 +364,7 @@
           <Property Name="bloqueado" Type="Boolean" />
           <Property Name="urlServicios" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Item" Relationship="Model.FK_Item_Proveedor" FromRole="Proveedor" ToRole="Item" />
+          <NavigationProperty Name="TelefonoContacto" Relationship="Model.FK_TelefonoContacto_Proveedor" FromRole="Proveedor" ToRole="TelefonoContacto" />
         </EntityType>
         <EntityType Name="PuntoVenta">
           <Key>
@@ -325,6 +386,25 @@
           <Property Name="tipo" Type="Int64" Nullable="false" />
           <Property Name="puntoVentaId" Type="Int64" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TelefonoContacto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="telefonoOperadoraId" Type="Int64" Nullable="false" />
+          <Property Name="proveedorId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Proveedor" Relationship="Model.FK_TelefonoContacto_Proveedor" FromRole="TelefonoContacto" ToRole="Proveedor" />
+          <NavigationProperty Name="TelefonoOperadora" Relationship="Model.FK_TelefonoContacto_TelefonoOperadora" FromRole="TelefonoContacto" ToRole="TelefonoOperadora" />
+        </EntityType>
+        <EntityType Name="TelefonoOperadora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TelefonoContacto" Relationship="Model.FK_TelefonoContacto_TelefonoOperadora" FromRole="TelefonoOperadora" ToRole="TelefonoContacto" />
         </EntityType>
         <EntityType Name="TransaccionPago">
           <Key>
@@ -396,6 +476,30 @@
             </Principal>
             <Dependent Role="ItemCampoCatalogo">
               <PropertyRef Name="itemCampoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonoContacto_Proveedor">
+          <End Type="Model.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="Model.TelefonoContacto" Role="TelefonoContacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonoContacto">
+              <PropertyRef Name="proveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TelefonoContacto_TelefonoOperadora">
+          <End Type="Model.TelefonoOperadora" Role="TelefonoOperadora" Multiplicity="1" />
+          <End Type="Model.TelefonoContacto" Role="TelefonoContacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TelefonoOperadora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TelefonoContacto">
+              <PropertyRef Name="telefonoOperadoraId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -495,6 +599,24 @@
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="identificadorExterno" ColumnName="identificadorExterno" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelefonoContacto">
+            <EntityTypeMapping TypeName="Model.TelefonoContacto">
+              <MappingFragment StoreEntitySet="TelefonoContacto">
+                <ScalarProperty Name="proveedorId" ColumnName="proveedorId" />
+                <ScalarProperty Name="telefonoOperadoraId" ColumnName="telefonoOperadoraId" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelefonoOperadora">
+            <EntityTypeMapping TypeName="Model.TelefonoOperadora">
+              <MappingFragment StoreEntitySet="TelefonoOperadora">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -33,6 +33,8 @@ namespace Model.Model
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<PuntoVenta> PuntoVenta { get; set; }
         public virtual DbSet<Saldo> Saldo { get; set; }
+        public virtual DbSet<TelefonoContacto> TelefonoContacto { get; set; }
+        public virtual DbSet<TelefonoOperadora> TelefonoOperadora { get; set; }
         public virtual DbSet<TransaccionPago> TransaccionPago { get; set; }
     }
 }

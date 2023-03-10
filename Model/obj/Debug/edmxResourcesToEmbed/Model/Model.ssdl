@@ -7,7 +7,7 @@
     <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="puntoVentaId" Type="bigint" Nullable="false" />
     <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="fechaAcreditacion" Type="datetime" />
+    <Property Name="fechaAcreditacion" Type="datetime" Nullable="false" />
     <Property Name="formaPagoId" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="FormaPago">
@@ -86,6 +86,22 @@
     <Property Name="puntoVentaId" Type="bigint" Nullable="false" />
     <Property Name="fecha" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="TelefonoContacto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numero" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="telefonoOperadoraId" Type="bigint" Nullable="false" />
+    <Property Name="proveedorId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TelefonoOperadora">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="TransaccionPago">
     <Key>
       <PropertyRef Name="id" />
@@ -159,6 +175,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TelefonoContacto_Proveedor">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+    <End Role="TelefonoContacto" Type="Self.TelefonoContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TelefonoContacto">
+        <PropertyRef Name="proveedorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TelefonoContacto_TelefonoOperadora">
+    <End Role="TelefonoOperadora" Type="Self.TelefonoOperadora" Multiplicity="1" />
+    <End Role="TelefonoContacto" Type="Self.TelefonoContacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TelefonoOperadora">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TelefonoContacto">
+        <PropertyRef Name="telefonoOperadoraId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="Acreditacion" EntityType="Self.Acreditacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FormaPago" EntityType="Self.FormaPago" Schema="dbo" store:Type="Tables" />
@@ -168,6 +208,8 @@
     <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PuntoVenta" EntityType="Self.PuntoVenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Saldo" EntityType="Self.Saldo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TelefonoContacto" EntityType="Self.TelefonoContacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TelefonoOperadora" EntityType="Self.TelefonoOperadora" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransaccionPago" EntityType="Self.TransaccionPago" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Acreditacion_FormaPago" Association="Self.FK_Acreditacion_FormaPago">
       <End Role="FormaPago" EntitySet="FormaPago" />
@@ -188,6 +230,14 @@
     <AssociationSet Name="FK_ItemCampoCatalogo_ItemCampo" Association="Self.FK_ItemCampoCatalogo_ItemCampo">
       <End Role="ItemCampo" EntitySet="ItemCampo" />
       <End Role="ItemCampoCatalogo" EntitySet="ItemCampoCatalogo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TelefonoContacto_Proveedor" Association="Self.FK_TelefonoContacto_Proveedor">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="TelefonoContacto" EntitySet="TelefonoContacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TelefonoContacto_TelefonoOperadora" Association="Self.FK_TelefonoContacto_TelefonoOperadora">
+      <End Role="TelefonoOperadora" EntitySet="TelefonoOperadora" />
+      <End Role="TelefonoContacto" EntitySet="TelefonoContacto" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
